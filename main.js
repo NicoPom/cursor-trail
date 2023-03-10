@@ -4,7 +4,7 @@ import { gsap } from "gsap";
 let circleSize = 10;
 
 // Set the number of circles in the trail
-const numCircles = 20;
+const numCircles = 50;
 
 // Create an array to store the circle elements
 const circles = [];
@@ -17,7 +17,7 @@ for (let i = 0; i < numCircles; i++) {
   circle.style.height = circleSize + "px";
   document.getElementById("trail").appendChild(circle);
   circles.push(circle);
-  circleSize -= 0.3;
+  circleSize -= 0.2;
 }
 
 // Initialize the positions of the circles
@@ -49,7 +49,7 @@ function animateCircles() {
     const left = prev.left - parent.left;
     const top = prev.top - parent.top;
     gsap.to(circles[i], {
-      duration: 0.0006,
+      duration: 0.001,
       x: left,
       y: top,
     });
