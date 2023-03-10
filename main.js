@@ -2,7 +2,7 @@
 let circleSize = 7;
 
 // Set the number of circles in the trail
-const numCircles = 40;
+const numCircles = 100;
 
 // Create an array to store the circle elements
 const circles = [];
@@ -15,7 +15,7 @@ for (let i = 0; i < numCircles; i++) {
   circle.style.height = circleSize + "px";
   document.getElementById("trail").appendChild(circle);
   circles.push(circle);
-  circleSize -= 0.25;
+  circleSize -= 0.06;
 }
 
 // Initialize the positions of the circles
