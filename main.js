@@ -1,8 +1,10 @@
+import { gsap } from "gsap";
+
 // Set the initial size of the circles
-let circleSize = 7;
+let circleSize = 10;
 
 // Set the number of circles in the trail
-const numCircles = 100;
+const numCircles = 20;
 
 // Create an array to store the circle elements
 const circles = [];
@@ -15,7 +17,7 @@ for (let i = 0; i < numCircles; i++) {
   circle.style.height = circleSize + "px";
   document.getElementById("trail").appendChild(circle);
   circles.push(circle);
-  circleSize -= 0.06;
+  circleSize -= 0.3;
 }
 
 // Initialize the positions of the circles
@@ -35,19 +37,23 @@ document.addEventListener("mousemove", function (event) {
 
 // Animate the position of the circles
 function animateCircles() {
-  // Move the first circle to the mouse position
-  circles[0].style.left = x + "px";
-  circles[0].style.top = y + "px";
+  gsap.to(circles[0], {
+    duration: 0.3,
+    x: x,
+    y: y,
+  });
 
-  // Move the remaining circles to the previous circle's position with a slight delay
   for (let i = 1; i < numCircles; i++) {
-    setTimeout(function () {
-      circles[i].style.left = circles[i - 1].style.left;
-      circles[i].style.top = circles[i - 1].style.top;
-    }, i * 3);
+    const parent = circles[i].parentNode.getBoundingClientRect();
+    const prev = circles[i - 1].getBoundingClientRect();
+    const left = prev.left - parent.left;
+    const top = prev.top - parent.top;
+    gsap.to(circles[i], {
+      duration: 0.0006,
+      x: left,
+      y: top,
+    });
   }
-
-  // Request the next animation frame
   requestAnimationFrame(animateCircles);
 }
 
