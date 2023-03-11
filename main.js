@@ -37,12 +37,14 @@ document.addEventListener("mousemove", function (event) {
 
 // Animate the position of the circles
 function animateCircles() {
+  // Move the first circle to the mouse position
   gsap.to(circles[0], {
     duration: 0.3,
     x: x,
     y: y,
   });
 
+  // Move the rest of the circles to the position of the previous circle
   for (let i = 1; i < numCircles; i++) {
     const parent = circles[i].parentNode.getBoundingClientRect();
     const prev = circles[i - 1].getBoundingClientRect();
